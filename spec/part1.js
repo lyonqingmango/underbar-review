@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var FILL_ME_IN = 'test';
+  var FILL_ME_IN = 'FILL_ME_IN';
 
   var checkForNativeMethods = function(runUnderbarFunction) {
     it('should not use the native version of any underbar methods in its implementation', function() {
@@ -126,7 +126,7 @@
           iterations.push([letter, index]);
         });
 
-        expect(iterations).to.eql(FILL_ME_IN);
+        expect(iterations).to.eql([['a', 0], ['b', 1], ['c', 2]]);
       });
 
       it('should iterate over arrays and provide access to the original collection', function() {
@@ -219,7 +219,7 @@
       it('should find 40 in the list', function() {
         var numbers = [10, 20, 30, 40, 50];
 
-        expect(_.indexOf(FILL_ME_IN, 40)).to.equal(3);
+        expect(_.indexOf(numbers, 40)).to.equal(3);
       });
 
       it('should be able to compute indexOf even when the native function is undefined', function() {
@@ -229,14 +229,14 @@
       });
 
       it('returns -1 when the target cannot be found not in the list', function() {
-        var numbers = FILL_ME_IN;
+        var numbers = [1, 2, 3];
 
         expect(_.indexOf(numbers, 35)).to.equal(-1);
       });
 
       it('returns the first index that the target can be found at when there are multiple matches', function() {
-        var numbers = FILL_ME_IN;
-        expect(FILL_ME_IN).to.equal(1);
+        var numbers = [1, 2, 2, 3];
+        expect(_.indexOf(numbers, 2)).to.equal(1);
       });
     });
 

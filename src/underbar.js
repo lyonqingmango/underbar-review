@@ -57,10 +57,9 @@
       for (var i = 0; i < collection.length; i++) {
         iterator(collection[i], i, collection);
       }
-    }
-    if (typeof collection === 'object') {
+    } else if (typeof collection === 'object') {
       for (var key in collection) {
-        iterator(collcetion[key], key, collection);
+        iterator(collection[key], key, collection);
       }
 
     }
