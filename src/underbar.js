@@ -116,9 +116,7 @@
         }
       }
       return res;
-    }
-
-    if (iterator) {
+    } else {
       for (var i = 0; i < array.length; i++) {
         if (!check.includes(iterator(array[i]))) {
           check.push(iterator(array[i]));
@@ -142,6 +140,13 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
+
+    var res = [];
+
+    for (var i = 0; i < collection.length; i++) {
+      res.push(iterator(collection[i]));
+    } return res;
+
   };
 
   /*
