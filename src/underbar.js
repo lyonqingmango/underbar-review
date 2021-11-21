@@ -209,7 +209,6 @@
 
 
 
-
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
     // TIP: Many iteration problems can be most easily expressed in
@@ -226,14 +225,51 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+    if (iterator === undefined) {
+      iterator = _.identity;
+    }
+    return _.reduce(collection, function(acc, item) {
+      if (!acc) {
+        return false;
+      }
+      if (!iterator(item)) {
+        return false;
+      } else {
+        acc = true;
+      }
+      return acc;
+    }, true);
+
+
+
   };
+  // expect(_.every([0, 10, 28], isEven)).to.be.true;
+  //expect(_.every([0, 11, 28], isEven)).to.be.false;
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    if (iterator === undefined) {
+      iterator = _.identity;
+    }
+    return _.reduce(collection, function(acc, item) {
+      if (acc) {
+        return true;
+      }
+      if (iterator(item)) {
+        return true;
+      } else {
+        acc = false;
+      }
+      return acc;
+    }, false);
   };
 
+  //expect(_.every([1, 11, 28], isEven)).to.be.true;
+  // acc start = false
+  // acc at index 0, ele = 1; acc = false   can't return false
+  //
 
   /**
    * OBJECTS
@@ -254,11 +290,28 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
+    for (var i = 1; i < arguments.length; i++) {
+      for (var key in arguments[i]) {
+        obj[key] = arguments[i][key];
+      }
+    }
+    return obj;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+
+    for (var i = 1; i < arguments.length; i++) {
+      for (var key in arguments[i]) {
+        if (obj[key] === undefined) {
+          obj[key] = arguments[i][key];
+
+        }
+      }
+    }
+    return obj;
+
   };
 
 
